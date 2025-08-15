@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C69B0D65-49CC-4E31-8DE4-3E40129DF8BD}|MarsOnboardingIC.csproj|c:\\users\\shalu\\source\\repos\\marsonboardingic\\ta_mars_docker\\pages\\skillpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C69B0D65-49CC-4E31-8DE4-3E40129DF8BD}|MarsOnboardingIC.csproj|solutionrelative:pages\\skillpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C69B0D65-49CC-4E31-8DE4-3E40129DF8BD}|MarsOnboardingIC.csproj|c:\\users\\shalu\\source\\repos\\marsonboardingic\\ta_mars_docker\\pages\\languagepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C69B0D65-49CC-4E31-8DE4-3E40129DF8BD}|MarsOnboardingIC.csproj|solutionrelative:pages\\languagepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,7 +54,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "SkillPage.cs",
+              "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Pages\\SkillPage.cs",
+              "RelativeDocumentMoniker": "Pages\\SkillPage.cs",
+              "ToolTip": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Pages\\SkillPage.cs",
+              "RelativeToolTip": "Pages\\SkillPage.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAIwJEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T05:51:31.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "LoginPage.cs",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Pages\\LoginPage.cs",
               "RelativeDocumentMoniker": "Pages\\LoginPage.cs",
@@ -62,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "LanguagePage.cs",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Pages\\LanguagePage.cs",
               "RelativeDocumentMoniker": "Pages\\LanguagePage.cs",
@@ -75,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "LanguageFeature.feature",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Features\\LanguageFeature.feature",
               "RelativeDocumentMoniker": "Features\\LanguageFeature.feature",
@@ -87,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "LanguageFeatureStepDefinitions.cs",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\StepDefinitions\\LanguageFeatureStepDefinitions.cs",
               "RelativeDocumentMoniker": "StepDefinitions\\LanguageFeatureStepDefinitions.cs",
@@ -99,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "HomePage.cs",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Pages\\HomePage.cs",
               "RelativeDocumentMoniker": "Pages\\HomePage.cs",
@@ -111,7 +128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Hooks.cs",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Utilities\\Hooks.cs",
               "RelativeDocumentMoniker": "Utilities\\Hooks.cs",
@@ -123,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Wait.cs",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\Utilities\\Wait.cs",
               "RelativeDocumentMoniker": "Utilities\\Wait.cs",
@@ -135,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "MarsOnboardingIC.csproj",
               "DocumentMoniker": "C:\\Users\\shalu\\source\\repos\\MarsOnboardingIC\\ta_mars_docker\\MarsOnboardingIC.csproj",
               "RelativeDocumentMoniker": "MarsOnboardingIC.csproj",

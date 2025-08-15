@@ -143,7 +143,7 @@ namespace MarsOnboardingIC.Pages
         public bool IsSkillDeleted(IWebDriver driver, string deleteSkill)
         {
             Thread.Sleep(1000); // Wait for the page to load after deletion
-            Wait.WaitToBeVisible(driver, "XPath", "//form[@class='ui form']//i[@class='remove icon']", 10);
+            
             IList<IWebElement> rows = driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]//table/tbody/tr"));
             foreach (IWebElement row in rows)
             {
