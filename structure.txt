@@ -1,0 +1,23 @@
+Folder PATH listing for volume Windows
+Volume serial number is 3E9D-5BFC
+C:.
+|   .DS_Store
+|   docker-compose.yaml
+|   README.md
+|   structure.txt
+|   
++---.idea
+|       .gitignore
+|       .name
+|       modules.xml
+|       ta_mars_docker.iml
+|       vcs.xml
+|       
++---App
+|   \---Mars.App.Web
+|           Dockerfile
+|           
++---mongo-init
+|       init.js
+|       
+\---New folder

@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+  mars.web.app:
+    platform: linux/arm64 # Ensure compatibility with ARM architecture
+    build:
+      context: .
+      dockerfile: Mars.App.Web/Dockerfile      
+    image: mvpstudionz/mars.web.app:latest
+    ports:
+      - '5003:5000'
+    depends_on:
+      - mongodb
+
+  mars.service.identity:
+    platform: linux/arm64 # Ensure compatibility with ARM architecture
+    build:
+      context: .
+      dockerfile: Mars.Services.Identity/Dockerfile
+    image: mvpstudionz/mars.service.identity:latest
+    ports:
+      - '60968:60968'
+    depends_on:
+      - mongodb
+
+  mars.service.listing:
+    platform: linux/arm64 # Ensure compatibility with ARM architecture
+    build:
+      context: .
+      dockerfile: Mars.Services.Listing/Dockerfile
+    image: mvpstudionz/mars.service.listing:latest
+    ports:
+      - '51689:51689'
+    depends_on:
+      - mongodb
+
+  mars.service.profile:
+    platform: linux/arm64 # Ensure compatibility with ARM architecture
+    build:
+      context: .
+      dockerfile: Mars.Services.Profile/Dockerfile
+    image: mvpstudionz/mars.service.profile:latest
+    ports:
+      - '60190:60190'
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mars-mongodb
+    ports:
+      - '27018:27017'
+    volumes:
+      - mongodb-data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    environment:
+      - MONGO_INITDB_DATABASE=mars
+
+  mongodb-seeder:
+    image: mongo:latest
+    depends_on:
+      - mongodb
+    volumes:
+      - ./mongo-init:/scripts
+    command: mongosh mongodb://mongodb:27017 --file /scripts/init.js
+    profiles:
+      - seed
+
+volumes:
+  mongodb-data:
+    driver: local
