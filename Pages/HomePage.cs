@@ -1,4 +1,5 @@
 ﻿using MarsOnboardingIC.Utilities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -9,25 +10,42 @@ using System.Threading.Tasks;
 
 namespace MarsOnboardingIC.Pages
 {
-    public class HomePage
+    public class HomePage :CommonDriver
     {
 
-        public void NavigateToLanguage(IWebDriver driver)
+        private readonly WebDriverWait wait;
+        private By LanguageButton =By.XPath("//a[contains(text(),'Languages')]");
+        private By SkillButton = By.XPath("//a[contains(text(),'Skills')]");
+        private By loggedInUserName = By.XPath("//div[@class='ui compact menu']//span[contains(@class,'dropdown') and contains(@class,'link')][last()]");
+        public HomePage()
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//a[contains(text(),'Languages')]")));
-            IWebElement LanguageButton = driver.FindElement(By.XPath("//a[contains(text(),'Languages')]"));
-            LanguageButton.Click();
+            wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+        }
+        
+        public void NavigateToLanguage()
+        {
+           
+            Wait.WaitToBeClicakable(Driver, "XPath", "//a[contains(text(),'Languages')]", 10);
+            Driver.FindElement(LanguageButton).Click();
             
         }
 
 
-        public void NavigateToSkill(IWebDriver driver)
+        public void NavigateToSkill()
         {
-            Wait.WaitToBeClicakable(driver, "XPath", "//a[contains(text(),'Skills')]", 10);
-            IWebElement SkillButton = driver.FindElement(By.XPath("//a[contains(text(),'Skills')]"));
-            SkillButton.Click();
-           // Thread.Sleep(2000); // Wait for the page to load
+            Wait.WaitToBeClicakable(Driver, "XPath", "//a[contains(text(),'Skills')]", 10);
+
+            Driver.FindElement(SkillButton).Click();
+           
+        }
+        public string GetLoggedInUserName()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(30));
+            
+    
+            IWebElement userElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(loggedInUserName));
+            return userElement.Text;  // Returns the displayed username
         }
     }
 }
