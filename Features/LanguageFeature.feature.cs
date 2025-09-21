@@ -102,7 +102,7 @@ namespace MarsOnboardingIC.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Hindi", "Conversational", null)]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Spanish", "Basic", null)]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("English", "Fluent", null)]
-        public async System.Threading.Tasks.Task AddingALanguageToTheList(string newlanguage, string languagelevel, string[] exampleTags)
+        public async System.Threading.Tasks.Task AddingALanguageToTheList(string language, string level, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "smoke"};
@@ -112,8 +112,8 @@ namespace MarsOnboardingIC.Features
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("newlanguage", newlanguage);
-            argumentsOfScenario.Add("languagelevel", languagelevel);
+            argumentsOfScenario.Add("language", language);
+            argumentsOfScenario.Add("level", level);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Adding a language to the list", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
@@ -132,31 +132,31 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.WhenAsync("I navigate to the language management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 9
- await testRunner.WhenAsync(string.Format("I add \"{0}\" and \"{1}\" to the list", newlanguage, languagelevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync(string.Format("I add \"{0}\" and \"{1}\" to the list", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 10
- await testRunner.ThenAsync(string.Format("I should see the new \"{0}\" and \"{1}\" in the list", newlanguage, languagelevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync(string.Format("I should see the new \"{0}\" and \"{1}\" in the list", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Editing an existing language")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("updating the language")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Language Feature")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Spanish", "Telugu", "Basic", "Fluent", null)]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Hindi", "Malayalam", "Conversational", "Fluent", null)]
-        public async System.Threading.Tasks.Task EditingAnExistingLanguage(string languageName, string updatedlanguageName, string languagelevel, string updatedlanguagelevel, string[] exampleTags)
+        public async System.Threading.Tasks.Task UpdatingTheLanguage(string existingLanguage, string newLanguage, string existingLevel, string newLevel, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("languageName", languageName);
-            argumentsOfScenario.Add("updatedlanguageName", updatedlanguageName);
-            argumentsOfScenario.Add("languagelevel", languagelevel);
-            argumentsOfScenario.Add("updatedlanguagelevel", updatedlanguagelevel);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Editing an existing language", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            argumentsOfScenario.Add("existingLanguage", existingLanguage);
+            argumentsOfScenario.Add("newLanguage", newLanguage);
+            argumentsOfScenario.Add("existingLevel", existingLevel);
+            argumentsOfScenario.Add("newLevel", newLevel);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("updating the language", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 20
-  this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -172,16 +172,13 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.WhenAsync("I navigate to the language management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 23
- await testRunner.AndAsync(string.Format("I update the\"{0}\" to \"{1}\" in the language list", languageName, updatedlanguageName), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.WhenAsync(string.Format("I add \"{0}\" and \"{1}\" to the list", existingLanguage, existingLevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 24
- await testRunner.AndAsync(string.Format("I update\"{0}\" to \"{1}\"", languagelevel, updatedlanguagelevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync(string.Format("I update the\"{0}\" to \"{1}\"  and \"{2}\" to \"{3}\" in the language list", existingLanguage, newLanguage, existingLevel, newLevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 25
- await testRunner.ThenAsync(string.Format("I should see the language \"{0}\" in the list", updatedlanguageName), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 26
- await testRunner.AndAsync(string.Format("the language level should be \"{0}\" in the list", updatedlanguagelevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.ThenAsync(string.Format("I should see the language \"{0}\" and \"{1}\"  in the list", newLanguage, newLevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -190,15 +187,16 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Performing Deletion of a language")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Language Feature")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Tamil", "", null)]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Hindi", "", null)]
-        public async System.Threading.Tasks.Task PerformingDeletionOfALanguage(string deletelanguage, string notUsed6248, string[] exampleTags)
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("English", "Fluent", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Hindi", "Conversationa", null)]
+        public async System.Threading.Tasks.Task PerformingDeletionOfALanguage(string language, string languagelevel, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("deletelanguage", deletelanguage);
+            argumentsOfScenario.Add("language", language);
+            argumentsOfScenario.Add("languagelevel", languagelevel);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performing Deletion of a language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 37
+#line 32
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -208,17 +206,112 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 38
+#line 33
   await testRunner.GivenAsync("I logged in as a user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 39
+#line 34
   await testRunner.WhenAsync("I navigate to the language management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 40
-  await testRunner.WhenAsync(string.Format("I delete the language \"{0}\" from the list", deletelanguage), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 35
+  await testRunner.WhenAsync(string.Format("I add \"{0}\" to the list", language), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 41
-  await testRunner.ThenAsync(string.Format("I should not see the language \"{0}\" in the list", deletelanguage), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 36
+  await testRunner.WhenAsync(string.Format("I delete the language \"{0}\" from the list", language), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 37
+  await testRunner.ThenAsync(string.Format("I should not see the language \"{0}\" in the list", language), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Trying to add language with blank entry")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Language Feature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Negative")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("", "Fluent", null)]
+        public async System.Threading.Tasks.Task TryingToAddLanguageWithBlankEntry(string language, string level, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("language", language);
+            argumentsOfScenario.Add("level", level);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Trying to add language with blank entry", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 44
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 45
+await testRunner.GivenAsync("I logged in as a user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 46
+await testRunner.WhenAsync("I navigate to the language management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 47
+await testRunner.WhenAsync(string.Format("I add blank\"{0}\" and \"{1}\" to the list", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 48
+await testRunner.ThenAsync("I should see an error message indicating that the language name is required", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Trying to add duplicate language entry")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Language Feature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Negative")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("English", "Fluent", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("English", "Fluent", null)]
+        public async System.Threading.Tasks.Task TryingToAddDuplicateLanguageEntry(string language, string level, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("language", language);
+            argumentsOfScenario.Add("level", level);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Trying to add duplicate language entry", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 55
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 56
+await testRunner.GivenAsync("I logged in as a user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 57
+await testRunner.WhenAsync("I navigate to the language management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 58
+await testRunner.AndAsync(string.Format("I ensure \"{0}\" with \"{1}\" exists in the list", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 59
+await testRunner.AndAsync(string.Format("I add duplicate entry of \"{0}\" and \"{1}\" to the list", language, level), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 60
+await testRunner.ThenAsync("I should see an error message indicating that the language already exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

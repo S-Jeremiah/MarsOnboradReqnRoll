@@ -102,7 +102,7 @@ namespace MarsOnboardingIC.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("API", "Beginner", null)]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Manual", "Expert", null)]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("SQL", "Beginner", null)]
-        public async System.Threading.Tasks.Task AddingASkillToTheList(string newSkill, string skilllevel, string[] exampleTags)
+        public async System.Threading.Tasks.Task AddingASkillToTheList(string skillname, string skilllevel, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "smoke"};
@@ -112,8 +112,8 @@ namespace MarsOnboardingIC.Features
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("newSkill", newSkill);
-            argumentsOfScenario.Add("Skilllevel", skilllevel);
+            argumentsOfScenario.Add("skillname", skillname);
+            argumentsOfScenario.Add("skilllevel", skilllevel);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Adding a Skill to the list", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
@@ -129,59 +129,10 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.GivenAsync("I logged in as a register user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 8
- await testRunner.WhenAsync("I navigate to the Skill management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync(string.Format("I add \"{0}\" and \"{1}\" to the list of skills", skillname, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 9
- await testRunner.AndAsync(string.Format("I add \"{0}\" and \"{1}\" to the list of skills", newSkill, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 10
- await testRunner.ThenAsync(string.Format("I should see the new \"{0}\" and \"{1}\" in the list below", newSkill, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Editing an existing Skill")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Skill Feature")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Coding", "Automation", "Intermediate", "Expert", null)]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Manual", "Jira", "Expert", "Intermediate", null)]
-        public async System.Threading.Tasks.Task EditingAnExistingSkill(string skillName, string updatedSkillName, string skilllevel, string updatedSkilllevel, string[] exampleTags)
-        {
-            string[] tagsOfScenario = exampleTags;
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("SkillName", skillName);
-            argumentsOfScenario.Add("updatedSkillName", updatedSkillName);
-            argumentsOfScenario.Add("Skilllevel", skilllevel);
-            argumentsOfScenario.Add("updatedSkilllevel", updatedSkilllevel);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Editing an existing Skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 18
- this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 19
- await testRunner.GivenAsync("I logged in as a user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 20
- await testRunner.WhenAsync("I navigate to the Skill management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 21
- await testRunner.AndAsync(string.Format("I update the\"{0}\" to \"{1}\" in the skill list", skillName, updatedSkillName), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 22
- await testRunner.AndAsync(string.Format("I update\"{0}\" to \"{1}\" in the skill list", skilllevel, updatedSkilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 23
- await testRunner.ThenAsync(string.Format("I should see the Skill \"{0}\" in the list", updatedSkillName), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 24
- await testRunner.AndAsync(string.Format("the Skill level should be \"{0}\"", updatedSkilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.ThenAsync(string.Format("I should see the new \"{0}\" and \"{1}\" in the list below", skillname, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -192,13 +143,13 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Skill Feature")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("SQL", "", null)]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("API", "", null)]
-        public async System.Threading.Tasks.Task PerformingDeletionOfAnExistingSkill(string deleteSkill, string notUsed6248, string[] exampleTags)
+        public async System.Threading.Tasks.Task PerformingDeletionOfAnExistingSkill(string skill, string notUsed6248, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("deleteSkill", deleteSkill);
+            argumentsOfScenario.Add("skill", skill);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performing Deletion of an Existing Skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 33
+#line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -208,17 +159,180 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 34
+#line 20
  await testRunner.GivenAsync("I logged in as a user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 35
- await testRunner.WhenAsync("I navigate to the Skill management page", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 21
+  await testRunner.WhenAsync("I add the \"<addskill>\" to the list", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 36
- await testRunner.AndAsync(string.Format("I delete the Skill \"{0}\" from the list", deleteSkill), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 22
+ await testRunner.AndAsync(string.Format("I delete the Skill \"{0}\" from the list", skill), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 37
- await testRunner.ThenAsync(string.Format("I should not see the Skill \"{0}\" in the list", deleteSkill), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 23
+ await testRunner.ThenAsync(string.Format("I should not see the Skill \"{0}\" in the list", skill), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Updating skill feature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Skill Feature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Coding", "Intermediate", "Automation", "Expert", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Manual", "Expert", "Jira", "Intermediate", null)]
+        public async System.Threading.Tasks.Task UpdatingSkillFeature(string skillname, string skilllevel, string newskillname, string newskilllevel, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skillname", skillname);
+            argumentsOfScenario.Add("skilllevel", skilllevel);
+            argumentsOfScenario.Add("newskillname", newskillname);
+            argumentsOfScenario.Add("newskilllevel", newskilllevel);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Updating skill feature", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 29
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 30
+ await testRunner.GivenAsync("I logged in as a register user in the portal", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 31
+ await testRunner.WhenAsync(string.Format("I add \"{0}\" and \"{1}\" to the table", skillname, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 32
+ await testRunner.WhenAsync(string.Format("I try to update the \"{0}\" \"{1}\" to \"{2}\" \"{3}\" in the table", skillname, skilllevel, newskillname, newskilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 33
+ await testRunner.AndAsync(string.Format("I should see updated \"{0}\" and \"{1}\" in the table", newskillname, newskilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Adding the Duplicate language")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Skill Feature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Negative")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Coding", "Expert", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Coding", "Expert", null)]
+        public async System.Threading.Tasks.Task AddingTheDuplicateLanguage(string skillname, string skilllevel, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skillname", skillname);
+            argumentsOfScenario.Add("skilllevel", skilllevel);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Adding the Duplicate language", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 41
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 42
+ await testRunner.GivenAsync("I logged in as a user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 43
+ await testRunner.WhenAsync(string.Format("I ensure \"{0}\" and \"{1}\" are in list", skillname, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 44
+ await testRunner.ThenAsync(string.Format("I add duplicate entry of \"{0}\" and \"{1}\"", skillname, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 45
+ await testRunner.ThenAsync("I should see error message indicating skill is already exists", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Trying to add the skill with blank space")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Skill Feature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Negative")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("", "Expert", null)]
+        public async System.Threading.Tasks.Task TryingToAddTheSkillWithBlankSpace(string skillname, string skilllevel, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skillname", skillname);
+            argumentsOfScenario.Add("skilllevel", skilllevel);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Trying to add the skill with blank space", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 53
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 54
+ await testRunner.GivenAsync("I logged in as a register user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 55
+ await testRunner.WhenAsync(string.Format("I try to add skill \"{0}\" with blank space and \"{1}\"", skillname, skilllevel), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 56
+ await testRunner.ThenAsync("I should see the error message saying please enter skill and level.", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Try deleting a skill that does not exist")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Skill Feature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Jira", "SQL", null)]
+        public async System.Threading.Tasks.Task TryDeletingASkillThatDoesNotExist(string addskill, string skill, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("addskill", addskill);
+            argumentsOfScenario.Add("skill", skill);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Try deleting a skill that does not exist", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 61
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 62
+await testRunner.GivenAsync("I logged in as a register user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 63
+await testRunner.WhenAsync(string.Format("I add the \"{0}\" to the list", addskill), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 64
+await testRunner.WhenAsync(string.Format("I try to delete a non-existing skill \"{0}\"", skill), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 65
+await testRunner.ThenAsync(string.Format("I should see a message indicating that the skill \"{0}\" does not exist", skill), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

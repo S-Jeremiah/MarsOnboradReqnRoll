@@ -3,177 +3,158 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarsOnboardingIC.Pages
 {
-    public class LanguagePage
+    public class LanguagePage : CommonDriver
     {
-        public void AddLanguage(IWebDriver driver,string newlanguage, string languagelevel)
+        private WebDriverWait wait;
+
+        // Scope all elements inside the Language tab using data-tab='first'
+        private By languageTab = By.XPath("//a[@data-tab='first']");
+        private By addNewButton = By.XPath("//div[@data-tab='first']//div[contains(@class,'ui teal button') and text()='Add New']");
+        private By languageInput = By.XPath("//div[@data-tab='first']//input[@placeholder='Add Language']");
+        private By languageLevelDropdown = By.XPath("//div[@data-tab='first']//select[@name='level']");
+        private By addButton = By.XPath("//div[@data-tab='first']//input[@type='button' and @value='Add']");
+        private By languageRows = By.XPath("//div[@data-tab='first']//table/tbody/tr");
+        private By errorblankmessage=By.XPath("//div[@class='ns-box-inner']");
+        private By duplicateerrorbtn=By.XPath("//div[@class='ns-box-inner']");
+        public LanguagePage()
         {
-            Wait.WaitToBeClicakable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div", 10);
-            IWebElement addnewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
-            addnewButton.Click();
+            wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+        }
 
-            IWebElement languageInput = driver.FindElement(By.XPath(" //input[@placeholder='Add Language']"));
-            languageInput.SendKeys(newlanguage);
+        // Open the Language tab
+        public void OpenLanguageTab()
+        {
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(languageTab)).Click();
+        }
 
-            Wait.WaitToBeVisible(driver, "XPath", "//select[@name='level']", 10);
-            SelectElement languageLevelDropdown = new SelectElement(driver.FindElement(By.Name("level")));
-            languageLevelDropdown.SelectByText(languagelevel);  
-
+        // Add a new language
+        public void AddLanguage(string language, string level)
+        {
+            OpenLanguageTab();
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(addNewButton)).Click();
+            Driver.FindElement(languageInput).SendKeys(language);
+            var dropdown = new SelectElement(wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(languageLevelDropdown)));
+            dropdown.SelectByText(level);
+            Driver.FindElement(addButton).Click();
+            wait.Until(d => IsLanguagePresent(language, level));
+        }
+        public void TryAddLanguage(string language, string level)
+        {
+            OpenLanguageTab();
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(addNewButton));
+            Driver.FindElement(addNewButton).Click();
+            Driver.FindElement(languageInput).SendKeys(language);
+            var dropdown = new SelectElement(wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(languageLevelDropdown)));
+            dropdown.SelectByText(level);
+            Driver.FindElement(addButton).Click();
             
+        }
+        // Check if language exists
+        public bool IsLanguagePresent(string language, string level)
+        {
+            OpenLanguageTab();
+            foreach (var row in Driver.FindElements(languageRows))
+            {
+                string lang = row.FindElement(By.XPath("./td[1]")).Text.Trim();
+                string langLevel = row.FindElement(By.XPath("./td[2]")).Text.Trim();
+                if (lang.Equals(language, StringComparison.OrdinalIgnoreCase) &&
+                    langLevel.Equals(level, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
+        }
 
-            IWebElement addButton = driver.FindElement(By.XPath("//div[@class='six wide field']//input[@type='button' and @value='Add']"));
-            addButton.Click();
+        // Update language and level
+        public void UpdateLanguage(string existingLanguage, string newLanguage, string existingLevel, string newLevel)
+        {
+            OpenLanguageTab();
+            foreach (var row in Driver.FindElements(languageRows))
+            {
+                string lang = row.FindElement(By.XPath("./td[1]")).Text.Trim();
+                string lvl = row.FindElement(By.XPath("./td[2]")).Text.Trim();
+
+                if (lang.Equals(existingLanguage, StringComparison.OrdinalIgnoreCase) &&
+                    lvl.Equals(existingLevel, StringComparison.OrdinalIgnoreCase))
+                {
+                    row.FindElement(By.XPath(".//i[contains(@class,'outline write icon')]")).Click();
+                    var editInput = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(languageInput));
+                    editInput.Clear();
+                    editInput.SendKeys(newLanguage);
+                    var dropdown = new SelectElement(row.FindElement(languageLevelDropdown));
+                    dropdown.SelectByText(newLevel);
+                    row.FindElement(By.XPath(".//input[@type='button' and @value='Update']")).Click();
+                    wait.Until(d => IsLanguagePresent(newLanguage, newLevel));
+                    break;
+                }
+            }
+        }
+        public void AddonlyLanguage(string language)
+        {
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(addNewButton));
+            Driver.FindElement(addNewButton).Click();
+            Driver.FindElement(languageInput).SendKeys(language);
+            Driver.FindElement(addButton).Click();
             Thread.Sleep(2000); // Wait for the language to be added
 
 
         }
-        public string GetLanguage(IWebDriver driver)
-        {
-            IWebElement newlanguage = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]"));
-            return newlanguage.Text;
-        }
 
-        public string GetLanguageLevel(IWebDriver driver)
+        // Delete language
+        public void DeleteLanguage(string language )
         {
-            IWebElement newlanglevel = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
-            return newlanglevel.Text;
-
-        }
-        public void UpdateLanguage(IWebDriver driver, string languageName, string updatedlanguageName)
-        {
-            IList<IWebElement> rows = driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]//table/tbody/tr"));
-
-            foreach (IWebElement row in rows)
+            OpenLanguageTab();
+            foreach (var row in Driver.FindElements(languageRows))
             {
                 string lang = row.FindElement(By.XPath("./td[1]")).Text.Trim();
-                //string level = row.FindElement(By.XPath("./td[2]")).Text.Trim();
-
-                if (lang.Equals(languageName, StringComparison.OrdinalIgnoreCase))
-                    
+                if (lang.Equals(language, StringComparison.OrdinalIgnoreCase))
                 {
-                    // Click edit icon in this row
-                    IWebElement edit = row.FindElement(By.XPath(".//i[contains(@class,'outline write icon')]"));
-                    edit.Click();
-                    IWebElement editLanguage = driver.FindElement(By.XPath(" //input[@placeholder='Add Language']"));
-                    editLanguage.Clear();
-                  
-                    editLanguage.SendKeys(updatedlanguageName);
-                    IWebElement updateButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]"));
-                    updateButton.Click();
-                    Thread.Sleep(2000); // Wait for the language to be updated  
+                    row.FindElement(By.XPath(".//i[contains(@class,'remove icon')]")).Click();
+                    wait.Until(d => IsLanguageDeleted(language));
                     break;
                 }
             }
-
         }
-        public void UpdateLanguageLevel(IWebDriver driver,string languagelevel,string updatedlanguagelevel)
+
+        // Check if language deleted
+        public bool IsLanguageDeleted(string language)
         {
-            IList<IWebElement> rows = driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]//table/tbody/tr"));
-            foreach (IWebElement row in rows)
-            {
-                //string lang = row.FindElement(By.XPath("./td[1]")).Text.Trim();
-                string level = row.FindElement(By.XPath("./td[2]")).Text.Trim();
-
-                if (level.Equals(languagelevel, StringComparison.OrdinalIgnoreCase))
-
-                {
-                    // Click edit icon in this row
-                    IWebElement edit = row.FindElement(By.XPath(".//i[contains(@class,'outline write icon')]"));
-                    edit.Click();
-                    SelectElement languageLevelDropdown = new SelectElement(driver.FindElement(By.Name("level")));
-                    languageLevelDropdown.SelectByText(updatedlanguagelevel);
-                    IWebElement updateButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]"));
-                    updateButton.Click();
-                    Thread.Sleep(2000); // Wait for the language to be updated  
-                    break;
-                }
-            }
-
-        }
-        
-       
-        public bool IsLanguagePresent(IWebDriver driver, string updatedlanguageName)
-        {
-            IList<IWebElement> rows = driver.FindElements(By.XPath("//*[@id='account-profile-section']//table/tbody/tr"));
-
-            foreach (IWebElement row in rows)
+            OpenLanguageTab();
+            foreach (var row in Driver.FindElements(languageRows))
             {
                 string lang = row.FindElement(By.XPath("./td[1]")).Text.Trim();
-                if (lang.Equals(updatedlanguageName, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
+                if (lang.Equals(language, StringComparison.OrdinalIgnoreCase))
+                    return false;
             }
-            return false;
+            return true;
         }
-
-        public bool IsLanguageLevelPresent(IWebDriver driver, string updatedlanguagelevel)
+        public string GetErrorMessage()
         {
-            IList<IWebElement> rows = driver.FindElements(By.XPath("//*[@id='account-profile-section']//table/tbody/tr"));
-
-            foreach (IWebElement row in rows)
+            try
             {
-                string level = row.FindElement(By.XPath("./td[2]")).Text.Trim();
-                if (level.Equals(updatedlanguagelevel, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
+                var errorElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(errorblankmessage));
+                return errorElement.Text;
             }
-            return false;
+            catch (WebDriverTimeoutException)
+            {
+                return string.Empty; // No error message found within the timeout
+            }
         }
-
-        public void DeleteLanguage(IWebDriver driver, string deletelanguage)
+        public string GetDuplicateErrorMessage()
         {
-            
-            Thread.Sleep(1000); // Wait for the delete confirmation dialog to appear
-            IList<IWebElement> rows = driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]//table/tbody/tr"));
-
-            foreach (IWebElement row in rows)
+            try
             {
-                string lang = row.FindElement(By.XPath("./td[1]")).Text.Trim();
-                //string level = row.FindElement(By.XPath("./td[2]")).Text.Trim();
-
-                if (lang.Equals(deletelanguage, StringComparison.OrdinalIgnoreCase))
-
-                {
-                    // Click edit icon in this row
-                    IWebElement deletebtn = row.FindElement(By.XPath(".//i[contains(@class,'remove icon')]"));
-                    deletebtn.Click();
-            
-                    
-                    break;
-                }
-                Thread.Sleep(2000); // Wait for the language to be updated  
+                var errorElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(duplicateerrorbtn));
+                return errorElement.Text;
             }
-
-        }
-        public bool IsLanguagedeleted(IWebDriver driver, string deletelanguage)
-        {
-            IList<IWebElement> rows = driver.FindElements(By.XPath("//*[@id='account-profile-section']//table/tbody/tr"));
-
-            foreach (IWebElement row in rows)
+            catch (WebDriverTimeoutException)
             {
-                string dellang = row.FindElement(By.XPath("./td[1]")).Text.Trim();
-                if (dellang.Equals(deletelanguage, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
+                return string.Empty; // No error message found within the timeout
             }
-            return false;
         }
-
-
     }
 
 
-
 }
-
-
-

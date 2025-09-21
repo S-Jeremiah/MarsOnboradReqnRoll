@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MarsOnboardingIC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b4512e7deb2567b00941d2f40758370601736b5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f246fcece1b8ac721f92dc0b64b1f668ed37544")]
 [assembly: System.Reflection.AssemblyProductAttribute("MarsOnboardingIC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MarsOnboardingIC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
